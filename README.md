@@ -1,4 +1,4 @@
-# busca_job
+# BuscaJob
 
 A new Flutter project.
 

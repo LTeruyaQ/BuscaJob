@@ -1,6 +1,6 @@
 {
-    "name": "busca_job",
-    "short_name": "busca_job",
+    "name": "BuscaJob",
+    "short_name": "BuscaJob",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
