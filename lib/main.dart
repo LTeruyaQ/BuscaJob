@@ -1,26 +1,29 @@
-  import 'package:BuscaJob/pages/login_page.dart';
 import 'package:flutter/material.dart';
+import 'screens/login_screen.dart';
+import 'screens/login_screen_details.dart';
+import 'screens/home_page.dart';
+import 'screens/notification_page.dart';
+import 'screens/settings_page.dart';
 
-  void main() {
-    runApp(const MyApp());
-  }
+void main() {
+  runApp(MyApp());
+}
 
-  class MyApp extends StatelessWidget {
-    const MyApp({super.key});
-
-    @override
-    Widget build(BuildContext context) {
-      return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'BuscaJob',
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'BuscaJob',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        primarySwatch: Colors.blue,
       ),
-        routes: {
-          "/": (context) => const LogInPage(),
-        },
-        initialRoute: "/",
-      );
-    }
+      home: LoginScreen(),
+      routes: {
+        '/login-details': (context) => LoginScreenDetails(),
+        '/home': (context) => HomePage(),
+        '/notifications': (context) => NotificationPage(),
+        '/settings': (context) => SettingsPage(),
+      },
+    );
   }
+}

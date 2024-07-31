@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "BuscaJob" "\0"
+            VALUE "FileDescription", "buscajob" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "BuscaJob" "\0"
+            VALUE "InternalName", "buscajob" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2024 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "BuscaJob.exe" "\0"
-            VALUE "ProductName", "BuscaJob" "\0"
+            VALUE "OriginalFilename", "buscajob.exe" "\0"
+            VALUE "ProductName", "buscajob" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
