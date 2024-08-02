@@ -17,63 +17,46 @@ class LoginScreenDetails extends StatelessWidget {
                 top: 0,
                 left: 0,
                 right: 0,
-
-              child: Image.asset('assets/Images/BackGround.png'),
-            ),
-        Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-                        children: [
-              Text('Bem vindo de volta!'),
-              SizedBox(height: 20),
-              TextField(
-                decoration: InputDecoration(labelText: 'Username/Email'),
+                child: Image.asset('assets/Images/BackGround.png'),
               ),
-              TextField(
-                decoration: InputDecoration(labelText: 'Senha'),
-                obscureText: true,
-              ),
-              SizedBox(height: 60),
-                          RichText(
-              text: TextSpan(
-                text: 'Crie uma conta',
-                style: TextStyle(
-                  fontFamily: 'Bentham',
-                  fontWeight: FontWeight.w400,
-                  color: const Color.fromARGB(255, 120, 116, 109),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  children: [
+                    Text('Bem vindo de volta!'),
+                    SizedBox(height: 20),
+                    TextField(
+                      decoration: InputDecoration(labelText: 'Username/Email'),
+                    ),
+                    TextField(
+                      decoration: InputDecoration(labelText: 'Senha'),
+                      obscureText: true,
+                    ),
+                    SizedBox(height: 60),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/home');
+                      },
+                      child: Text('Entrar'),
+                    ),
+                    RichText(
+                      text: TextSpan(
+                        text: 'Esqueceu a senha?',
+                        style: TextStyle(
+                          fontFamily: 'Bentham',
+                          fontWeight: FontWeight.w400,
+                          color: const Color.fromARGB(255, 120, 116, 109),
+                        ),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            Navigator.pushNamed(context, '/RecuperarSenha');
+                          },
+                      ),
+                    ),
+                    const SizedBox(height: 2.0),
+                  ],
                 ),
-                recognizer: TapGestureRecognizer()
-                  ..onTap = () {
-                    Navigator.pushNamed(context, '/SignUp');
-                  },
               ),
-            ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/home');
-                },
-                child: Text('Entrar'),
-              ),
-
-            RichText(
-              text: TextSpan(
-                text: 'Esqueceu a senha?',
-                style: TextStyle(
-                  fontFamily: 'Bentham',
-                  fontWeight: FontWeight.w400,
-                  color: const Color.fromARGB(255, 120, 116, 109),
-                ),
-                recognizer: TapGestureRecognizer()
-                  ..onTap = () {
-                    Navigator.pushNamed(context, '/RecuperarSenha');
-                  },
-              ),
-            ),
-            const SizedBox(height: 2.0),
-
-                        ],
-          ),
-),
             ],
           ),
         ),

@@ -16,6 +16,7 @@ import 'screens/privacy_policy_screen.dart';
 import 'screens/select_resume_screen.dart';
 import 'screens/resume_metrics_screen.dart';
 import 'screens/resume_suggestions_screen.dart';
+import 'screens/first_access_registration.dart'; // Importação da nova tela
 
 void main() {
   runApp(MyApp());
@@ -47,6 +48,7 @@ class MyApp extends StatelessWidget {
         '/select-resume': (context) => SelectResumeScreen(),
         '/resume-metrics': (context) => ResumeMetricsScreen(),
         '/resume-suggestions': (context) => ResumeSuggestionsScreen(),
+        '/first-access': (context) => FirstAccessRegistration(), // Nova rota adicionada
       },
     );
   }

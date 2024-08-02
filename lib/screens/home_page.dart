@@ -48,10 +48,10 @@ class HomePage extends StatelessWidget {
         onTap: (index) {
           switch (index) {
             case 0:
-              Navigator.pushNamed(context, '/home');
+              Navigator.pushNamed(context, '/submit-resume');
               break;
             case 1:
-              Navigator.pushNamed(context, '/submit-resume');
+              Navigator.pushNamed(context, '/home');
               break;
             case 2:
               Navigator.pushNamed(context, '/available-jobs');
@@ -82,15 +82,20 @@ class Header extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 30,
-                backgroundImage: AssetImage('assets/user_placeholder.png'),
+                backgroundImage: AssetImage('assets/images/user_placeholder.png'),
               ),
               SizedBox(width: 20),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Bem vinda de volta,',
-                    style: TextStyle(color: Colors.white, fontSize: 18),
+                  Row(
+                    children: [
+                      SizedBox(width: 10),
+                      Text(
+                        'Bem vinda de volta,',
+                        style: TextStyle(color: Colors.white, fontSize: 18),
+                      ),
+                    ],
                   ),
                   Text(
                     'Mariah Gonzalez',
@@ -146,7 +151,7 @@ class DashboardItem extends StatelessWidget {
   final String label;
   final String route;
 
-DashboardItem({required this.icon, required this.label, required this.route});
+  DashboardItem({required this.icon, required this.label, required this.route});
 
   @override
   Widget build(BuildContext context) {
