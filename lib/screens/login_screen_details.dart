@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreenDetails extends StatelessWidget {
@@ -5,16 +6,24 @@ class LoginScreenDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Padding(
+        child: Container(
+          width: double.infinity,
+          height: double.infinity,
+          decoration: const BoxDecoration(
+          ),
+          child: Column(
+            children: [
+              Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+
+              child: Image.asset('assets/Images/BackGround.png'),
+            ),
+        Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset('assets/logo.png'), // Substitua pelo seu logo
-              Text(
-                'BuscaJob',
-                style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-              ),
+                        children: [
               Text('Bem vindo de volta!'),
               SizedBox(height: 20),
               TextField(
@@ -24,13 +33,47 @@ class LoginScreenDetails extends StatelessWidget {
                 decoration: InputDecoration(labelText: 'Senha'),
                 obscureText: true,
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 60),
+                          RichText(
+              text: TextSpan(
+                text: 'Crie uma conta',
+                style: TextStyle(
+                  fontFamily: 'Bentham',
+                  fontWeight: FontWeight.w400,
+                  color: const Color.fromARGB(255, 120, 116, 109),
+                ),
+                recognizer: TapGestureRecognizer()
+                  ..onTap = () {
+                    Navigator.pushNamed(context, '/SignUp');
+                  },
+              ),
+            ),
               ElevatedButton(
                 onPressed: () {
                   Navigator.pushNamed(context, '/home');
                 },
                 child: Text('Entrar'),
               ),
+
+            RichText(
+              text: TextSpan(
+                text: 'Esqueceu a senha?',
+                style: TextStyle(
+                  fontFamily: 'Bentham',
+                  fontWeight: FontWeight.w400,
+                  color: const Color.fromARGB(255, 120, 116, 109),
+                ),
+                recognizer: TapGestureRecognizer()
+                  ..onTap = () {
+                    Navigator.pushNamed(context, '/RecuperarSenha');
+                  },
+              ),
+            ),
+            const SizedBox(height: 2.0),
+
+                        ],
+          ),
+),
             ],
           ),
         ),
