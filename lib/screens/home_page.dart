@@ -30,15 +30,17 @@ class HomePage extends StatelessWidget {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
+        currentIndex: 1,
         items: [
+                    BottomNavigationBarItem(
+            icon: Icon(Icons.add_circle),
+            label: 'Adicionar Currículo',
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add_circle),
-            label: 'Adicionar Currículo',
-          ),
+
           BottomNavigationBarItem(
             icon: Icon(Icons.list_alt),
             label: 'Vagas',
