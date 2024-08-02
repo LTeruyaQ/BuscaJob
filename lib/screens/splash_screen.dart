@@ -12,7 +12,7 @@ class SplashScreen extends StatelessWidget {
       backgroundColor: Colors.blue.shade100,
       body: Center(
         child: Image.asset(
-          'assets/logo.png', // Certifique-se de que a imagem está no local correto
+          'assets/images/logo.png', // Certifique-se de que a imagem está no local correto
           width: 150,
           height: 150,
         ),
