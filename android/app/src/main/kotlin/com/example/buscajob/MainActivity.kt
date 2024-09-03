@@ -1,4 +1,4 @@
-package com.example.busca_job
+package com.example.buscajob
 
 import io.flutter.embedding.android.FlutterActivity
 
