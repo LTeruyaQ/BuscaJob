@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart'; // Importação necessária
 import 'screens/login_screen.dart';
 import 'screens/login_screen_details.dart';
 import 'screens/home_page.dart';
@@ -17,8 +19,21 @@ import 'screens/select_resume_screen.dart';
 import 'screens/resume_metrics_screen.dart';
 import 'screens/resume_suggestions_screen.dart';
 import 'screens/first_access_registration.dart'; // Importação da nova tela
+import 'firebase_options.dart'; // Importar as configurações do Firebase Web
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Inicializa o Firebase com as opções corretas para a Web ou Mobile
+  if (kIsWeb) {
+    await Firebase.initializeApp(
+      options:
+          DefaultFirebaseOptions.web, // Use a constante DefaultFirebaseOptions
+    );
+  } else {
+    await Firebase.initializeApp();
+  }
+
   runApp(MyApp());
 }
 
@@ -48,7 +63,8 @@ class MyApp extends StatelessWidget {
         '/select-resume': (context) => SelectResumeScreen(),
         '/resume-metrics': (context) => ResumeMetricsScreen(),
         '/resume-suggestions': (context) => ResumeSuggestionsScreen(),
-        '/first-access': (context) => FirstAccessRegistration(), // Nova rota adicionada
+        '/first-access': (context) =>
+            FirstAccessRegistration(), // Nova rota adicionada
       },
     );
   }

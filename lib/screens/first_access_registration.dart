@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class FirstAccessRegistration extends StatefulWidget {
   @override
-  _FirstAccessRegistrationState createState() => _FirstAccessRegistrationState();
+  _FirstAccessRegistrationState createState() =>
+      _FirstAccessRegistrationState();
 }
 
 class _FirstAccessRegistrationState extends State<FirstAccessRegistration> {
   bool _isChecked = false;
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +25,8 @@ class _FirstAccessRegistrationState extends State<FirstAccessRegistration> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(height: 40),
-                Image.asset('assets/Images/BackGround.png'), // Substitua pelo seu logo
+                Image.asset(
+                    'assets/Images/BackGround.png'), // Substitua pelo seu logo
                 SizedBox(height: 20),
                 Text(
                   'Cadastro',
@@ -29,6 +34,7 @@ class _FirstAccessRegistrationState extends State<FirstAccessRegistration> {
                 ),
                 SizedBox(height: 20),
                 TextField(
+                  controller: _emailController,
                   decoration: InputDecoration(
                     labelText: 'Username/Email',
                     prefixIcon: Icon(Icons.person),
@@ -44,37 +50,8 @@ class _FirstAccessRegistrationState extends State<FirstAccessRegistration> {
                 ),
                 SizedBox(height: 10),
                 TextField(
-                  decoration: InputDecoration(
-                    labelText: 'Nome',
-                    prefixIcon: Icon(Icons.person_outline),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30),
-                      borderSide: BorderSide(color: Color(0xFF4A55FF)),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30),
-                      borderSide: BorderSide(color: Color(0xFF4A55FF)),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 10),
-                TextField(
-                  decoration: InputDecoration(
-                    labelText: 'Data de nascimento',
-                    prefixIcon: Icon(Icons.calendar_today),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30),
-                      borderSide: BorderSide(color: Color(0xFF4A55FF)),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30),
-                      borderSide: BorderSide(color: Color(0xFF4A55FF)),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 10),
-                TextField(
                   obscureText: true,
+                  controller: _passwordController,
                   decoration: InputDecoration(
                     labelText: 'Senha',
                     prefixIcon: Icon(Icons.lock),
@@ -140,15 +117,45 @@ class _FirstAccessRegistrationState extends State<FirstAccessRegistration> {
                 ),
                 SizedBox(height: 20),
                 ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     if (_isChecked) {
-                      Navigator.pushNamed(context, '/home');
+                      try {
+                        UserCredential userCredential = await FirebaseAuth
+                            .instance
+                            .createUserWithEmailAndPassword(
+                          email: _emailController.text,
+                          password: _passwordController.text,
+                        );
+                        Navigator.pushNamed(context, '/home');
+                      } on FirebaseAuthException catch (e) {
+                        if (e.code == 'weak-password') {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                                content:
+                                    Text('The password provided is too weak.')),
+                          );
+                        } else if (e.code == 'email-already-in-use') {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                                content: Text(
+                                    'The account already exists for that email.')),
+                          );
+                        }
+                      } catch (e) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                              content: Text('Error occurred during sign up.')),
+                        );
+                      }
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                            content:
+                                Text('You must accept the terms to continue.')),
+                      );
                     }
                   },
-                  child: Text(
-                    'Entrar',
-                    style: TextStyle(color: Colors.white),
-                  ),
+                  child: Text('Registrar'),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xFF4A55FF),
                     padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
