@@ -4,37 +4,68 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Container(
-          width: double.infinity,
-          height: double.infinity,
-          decoration: const BoxDecoration(),
-          child: Column(
-            children: [
-              Positioned(
-                top: 0,
-                left: 0,
-                right: 0,
-                child: Image.asset('assets/Images/BackGround.png'),
+      body: Stack(
+        children: [
+          // Imagem de fundo
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: AspectRatio(
+              aspectRatio: 3 / 2, // Ajuste para a proporção desejada
+              child: Image.asset(
+                'assets/Images/BackGround.png',
+                fit: BoxFit.cover,
               ),
-              Text('Ei, você está de volta!\nÉ hora de achar a vaga ideal!'),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/login-details');
-                },
-                child: Text('Realizar Login'),
-              ),
-              SizedBox(height: 10),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/first-access');
-                },
-                child: Text('Primeiro Acesso'),
-              ),
-            ],
+            ),
           ),
-        ),
+          Center(
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.35),
+                  SizedBox(height: 20),
+                  Text(
+                    'Ei, você está de volta!\nÉ hora de achar a vaga ideal!',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.black,
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/login-details');
+                      },
+                      child: Text('Realizar Login'),
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: Size(double.infinity, 50),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/first-access');
+                      },
+                      child: Text('Primeiro Acesso'),
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: Size(double.infinity, 50),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 20), // Adicionado espaçamento inferior
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(8.0),

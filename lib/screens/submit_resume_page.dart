@@ -5,48 +5,171 @@ class SubmitResumePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Adicionar Currículo'),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.settings),
-            onPressed: () {
-              Navigator.pushNamed(context, '/settings');
-            },
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(120), // Aumenta a altura do cabeçalho
+        child: AppBar(
+          automaticallyImplyLeading: false,
+          backgroundColor: Color(0xFF4A55FF), // Cor da barra superior ajustada
+          flexibleSpace: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CircleAvatar(
+                  backgroundImage: AssetImage('assets/images/user_placeholder.png'), // Caminho da imagem local
+                  radius: 36, // Aumentei o tamanho do avatar
+                ),
+                SizedBox(width: 10),
+                Text(
+                  'Adicionar Currículo',
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                Spacer(),
+                IconButton(
+                  icon: Icon(Icons.notifications, color: Colors.white),
+                  onPressed: () {
+                    // Ação de notificações
+                  },
+                ),
+                IconButton(
+                  icon: Icon(Icons.settings, color: Colors.white),
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/settings');
+                  },
+                ),
+              ],
+            ),
           ),
-        ],
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ListView(
           children: [
-            TextField(
-              decoration: InputDecoration(labelText: 'Nome e Sobrenome'),
+            // Título principal
+            Text(
+              'Dados profissionais',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 8),
+            // Subtítulo
+            Text(
+              'Upload de currículo ou preenchimento manual.',
+              style: TextStyle(fontSize: 16),
+            ),
+            SizedBox(height: 20),
+            // Nome
+            Text(
+              'Nome',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
             ),
             TextField(
-              decoration: InputDecoration(labelText: 'Data de nascimento'),
+              decoration: InputDecoration(
+                hintText: 'Nome e Sobrenome',
+                filled: true,
+                fillColor: Color(0xFFF2F2F2),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20), // Arredonda as bordas
+                  borderSide: BorderSide.none,
+                ),
+              ),
+            ),
+            SizedBox(height: 20),
+            // Data de nascimento
+            Text(
+              'Data de nascimento',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+            ),
+            TextField(
+              decoration: InputDecoration(
+                hintText: 'Selecione sua data de nascimento',
+                suffixIcon: Icon(Icons.calendar_today),
+                filled: true,
+                fillColor: Color(0xFFF2F2F2),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20), // Arredonda as bordas
+                  borderSide: BorderSide.none,
+                ),
+              ),
               keyboardType: TextInputType.datetime,
               onTap: () {
                 // Implementar picker de data
               },
             ),
-            TextField(
-              decoration: InputDecoration(labelText: 'Formação acadêmica'),
+            SizedBox(height: 20),
+            // Formação acadêmica
+            Text(
+              'Formação acadêmica',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
             ),
             TextField(
-              decoration: InputDecoration(labelText: 'Experiências'),
+              decoration: InputDecoration(
+                hintText: 'Formação acadêmica',
+                filled: true,
+                fillColor: Color(0xFFF2F2F2),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20), // Arredonda as bordas
+                  borderSide: BorderSide.none,
+                ),
+              ),
+              maxLines: 3,
+            ),
+            SizedBox(height: 20),
+            // Experiências
+            Text(
+              'Experiências',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+            ),
+            TextField(
+              decoration: InputDecoration(
+                hintText: 'Experiências',
+                filled: true,
+                fillColor: Color(0xFFF2F2F2),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20), // Arredonda as bordas
+                  borderSide: BorderSide.none,
+                ),
+              ),
+              maxLines: 3,
             ),
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 // Implementar upload de currículo
               },
-              child: Text('Upload'),
+              style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.symmetric(vertical: 16),
+                backgroundColor: Color(0xFF4A55FF), // Cor do botão ajustada
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20), // Arredonda as bordas do botão
+                ),
+              ),
+              child: Text(
+                'Upload',
+                style: TextStyle(color: Colors.white), // Fonte branca no botão
+              ),
             ),
             SizedBox(height: 20),
             ElevatedButton.icon(
               icon: FaIcon(FontAwesomeIcons.linkedin, color: Colors.white),
-              label: Text('Enviar currículo ou integrar com LinkedIn'),
+              label: Text(
+                'Enviar currículo ou integrar com LinkedIn',
+                style: TextStyle(color: Colors.white), // Fonte branca no botão
+              ),
+              style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.symmetric(vertical: 16),
+                backgroundColor: Color(0xFF4A55FF), // Cor do botão ajustada
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20), // Arredonda as bordas do botão
+                ),
+              ),
               onPressed: () {
                 // Implementar integração com LinkedIn
               },
