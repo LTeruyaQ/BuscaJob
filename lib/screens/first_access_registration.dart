@@ -11,10 +11,13 @@ class _FirstAccessRegistrationState extends State<FirstAccessRegistration> {
   bool _isChecked = false;
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: Center(
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 20),
@@ -24,10 +27,18 @@ class _FirstAccessRegistrationState extends State<FirstAccessRegistration> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(height: 40),
-                Image.asset(
-                    'assets/Images/BackGround.png'), // Substitua pelo seu logo
-                SizedBox(height: 20),
+                // Imagem de fundo
+                Positioned(
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  child: Image.asset(
+                    'assets/Images/BackGround.png',
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height * 0.4,
+                    fit: BoxFit.cover,
+                  ),
+                ),
                 Text(
                   'Cadastro',
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
@@ -69,6 +80,7 @@ class _FirstAccessRegistrationState extends State<FirstAccessRegistration> {
                 SizedBox(height: 10),
                 TextField(
                   obscureText: true,
+                  controller: _confirmPasswordController,
                   decoration: InputDecoration(
                     labelText: 'Repetir Senha',
                     prefixIcon: Icon(Icons.lock),
@@ -119,32 +131,40 @@ class _FirstAccessRegistrationState extends State<FirstAccessRegistration> {
                 ElevatedButton(
                   onPressed: () async {
                     if (_isChecked) {
-                      try {
-                        UserCredential userCredential = await FirebaseAuth
-                            .instance
-                            .createUserWithEmailAndPassword(
-                          email: _emailController.text,
-                          password: _passwordController.text,
-                        );
-                        Navigator.pushNamed(context, '/home');
-                      } on FirebaseAuthException catch (e) {
-                        if (e.code == 'weak-password') {
+                      if (_passwordController.text ==
+                          _confirmPasswordController.text) {
+                        try {
+                          UserCredential userCredential = await FirebaseAuth
+                              .instance
+                              .createUserWithEmailAndPassword(
+                            email: _emailController.text,
+                            password: _passwordController.text,
+                          );
+                          Navigator.pushNamed(context, '/home');
+                        } on FirebaseAuthException catch (e) {
+                          if (e.code == 'weak-password') {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                  content: Text(
+                                      'The password provided is too weak.')),
+                            );
+                          } else if (e.code == 'email-already-in-use') {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                  content: Text(
+                                      'The account already exists for that email.')),
+                            );
+                          }
+                        } catch (e) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                                 content:
-                                    Text('The password provided is too weak.')),
-                          );
-                        } else if (e.code == 'email-already-in-use') {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                                content: Text(
-                                    'The account already exists for that email.')),
+                                    Text('Error occurred during sign up.')),
                           );
                         }
-                      } catch (e) {
+                      } else {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                              content: Text('Error occurred during sign up.')),
+                          SnackBar(content: Text('Passwords do not match.')),
                         );
                       }
                     } else {
@@ -169,7 +189,7 @@ class _FirstAccessRegistrationState extends State<FirstAccessRegistration> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text('Version 1.0.0'),
-                    Text('Powered by Srtn.Co'),
+                    Text('Powered by SetCo.'),
                     Text('Help & Support'),
                   ],
                 ),
